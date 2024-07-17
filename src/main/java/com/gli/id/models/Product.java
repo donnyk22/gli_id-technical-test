@@ -1,6 +1,7 @@
 package com.gli.id.models;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,6 +15,7 @@ import java.util.Date;
 @Accessors(chain = true)
 @Entity
 @Table(name = "products")
+@EntityListeners(BaseHook.class)
 @SQLRestriction("deleted = false")
 public class Product extends BaseModel{
     private String product_name;

@@ -9,9 +9,7 @@ public class OrderDetailMapper {
                 .setOrder_id(model.getOrder_id())
                 .setProduct_id(model.getProduct_id())
                 .setQty(model.getQty());
-        orderDetailDto.setId(model.getId())
-                .setCreated_at(model.getCreated_at())
-                .setUpdated_at(model.getUpdated_at());
+        orderDetailDto.setId(model.getId());
         if (model.getProduct_detail() != null){
             orderDetailDto.setProduct_detail(ProductMapper.toDto(model.getProduct_detail()));
         }

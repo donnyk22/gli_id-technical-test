@@ -1,6 +1,7 @@
 package com.gli.id.models;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,6 +13,7 @@ import org.hibernate.annotations.SQLRestriction;
 @Accessors(chain = true)
 @Entity
 @Table(name = "users")
+@EntityListeners(BaseHook.class)
 @SQLRestriction("deleted = false")
 public class User extends BaseModel{
     private String name;

@@ -9,9 +9,7 @@ public class ProductMapper {
                 .setProduct_name(model.getProduct_name())
                 .setPrice(model.getPrice())
                 .setExpired_date(model.getExpired_date());
-        productDto.setId(model.getId())
-                .setCreated_at(model.getCreated_at())
-                .setUpdated_at(model.getUpdated_at());
+        productDto.setId(model.getId());
         return productDto;
     }
 }

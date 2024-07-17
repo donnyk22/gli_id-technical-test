@@ -1,19 +1,13 @@
 package com.gli.id.services.order;
 
-import com.gli.id.dtos.OrderDetailDto;
 import com.gli.id.dtos.OrderDto;
 import com.gli.id.dtos.exceptions.BusinessException;
 import com.gli.id.dtos.forms.OrderAddForm;
 import com.gli.id.dtos.forms.OrderDetailAddForm;
 import com.gli.id.dtos.forms.OrderDetailEditForm;
 import com.gli.id.dtos.forms.OrderEditForm;
-import com.gli.id.dtos.mappers.OrderDetailMapper;
 import com.gli.id.dtos.mappers.OrderMapper;
-import com.gli.id.dtos.queryfilters.OrderQueryFilter;
-import com.gli.id.models.Order;
-import com.gli.id.models.OrderDetail;
-import com.gli.id.models.Product;
-import com.gli.id.models.User;
+import com.gli.id.models.*;
 import com.gli.id.repositories.OrderDetailRepository;
 import com.gli.id.repositories.OrderRepository;
 import com.gli.id.repositories.ProductRepository;
@@ -44,13 +38,19 @@ public class OrderServiceImpl implements OrderService{
     UserRepository userRepository;
 
     @Override
-    public List<OrderDto> find(OrderQueryFilter queryFilter) {
-        Iterable<Order> orders = orderRepository.findAll();
-        if (!orders.iterator().hasNext()) throw new BusinessException("Order data is empty");
-        return StreamSupport
-                .stream(orders.spliterator(), false)
-                .map(OrderMapper::toBaseDto)
-                .collect(Collectors.toList());
+    public List<OrderDto> find(Integer id) {
+        if (id == null){
+            Iterable<Order> orders = orderRepository.findAll();
+            if (!orders.iterator().hasNext()) throw new BusinessException("Order data is empty");
+            return StreamSupport
+                    .stream(orders.spliterator(), false)
+                    .map(OrderMapper::toBaseDto)
+                    .collect(Collectors.toList());
+        }
+
+        Order order = orderRepository.findById(id).orElse(null);
+        if (order == null) throw new BusinessException("Order data not found");
+        return new ArrayList<>(List.of(OrderMapper.toDetailDto(order)));
     }
 
     @Override
@@ -58,7 +58,9 @@ public class OrderServiceImpl implements OrderService{
         Order order = new Order();
         User user = userRepository.findById(form.getUser_id()).orElse(null);
         if (user == null) throw new BusinessException("User data is not found");
-        order.setUser_detail(user);
+        order.setUser_id(form.getUser_id())
+                .setTotal_price(0)
+                .setUser_detail(user);
         orderRepository.save(order);
 
         int totalPrice = 0;
@@ -73,7 +75,8 @@ public class OrderServiceImpl implements OrderService{
                 OrderDetail orderDetail = new OrderDetail()
                         .setOrder_id(order.getId())
                         .setProduct_id(orderDetailAddForm.getProduct_id())
-                        .setQty(orderDetailAddForm.getQty());
+                        .setQty(orderDetailAddForm.getQty())
+                        .setProduct_detail(product);
 
                 orderDetailRepository.save(orderDetail);
 
@@ -112,7 +115,8 @@ public class OrderServiceImpl implements OrderService{
                 OrderDetail orderDetail = new OrderDetail()
                         .setOrder_id(form.getId())
                         .setProduct_id(orderDetailEditForm.getProduct_id())
-                        .setQty(orderDetailEditForm.getQty());
+                        .setQty(orderDetailEditForm.getQty())
+                        .setProduct_detail(product);
 
                 if (orderDetailEditForm.getId() != null) orderDetail.setId(orderDetailEditForm.getId());
 

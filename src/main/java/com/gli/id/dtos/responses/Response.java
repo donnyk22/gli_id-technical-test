@@ -23,6 +23,7 @@ public class Response<T> {
         Response<T> response = new Response<>();
         response.setStatus(200);
         response.setData(data);
+        response.setMessage("Success");
         return response;
     }
 

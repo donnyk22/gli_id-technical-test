@@ -13,9 +13,7 @@ public class OrderMapper {
         OrderDto orderDto = new OrderDto()
                 .setUser_id(model.getUser_id())
                 .setTotal_price(model.getTotal_price());
-        orderDto.setId(model.getId())
-                .setCreated_at(model.getCreated_at())
-                .setUpdated_at(model.getUpdated_at());
+        orderDto.setId(model.getId());
         return orderDto;
     }
 

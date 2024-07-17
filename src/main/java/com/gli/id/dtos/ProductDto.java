@@ -9,7 +9,8 @@ import java.util.Date;
 @Getter
 @Setter
 @Accessors(chain = true)
-public class ProductDto extends BaseDto{
+public class ProductDto {
+    private Integer id;
     private String product_name;
     private Date expired_date;
     private Integer price;

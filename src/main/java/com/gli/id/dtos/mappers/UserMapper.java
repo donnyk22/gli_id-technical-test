@@ -10,9 +10,7 @@ public class UserMapper {
                 .setAddress(model.getAddress())
                 .setPhone(model.getPhone())
                 .setEmail(model.getEmail());
-        userDto.setId(model.getId())
-                .setCreated_at(model.getCreated_at())
-                .setUpdated_at(model.getUpdated_at());
+        userDto.setId(model.getId());
         return userDto;
     }
 }

@@ -11,6 +11,7 @@ import org.hibernate.annotations.SQLRestriction;
 @Accessors(chain = true)
 @Entity
 @Table(name = "order_details")
+@EntityListeners(BaseHook.class)
 @SQLRestriction("deleted = false")
 public class OrderDetail extends BaseModel{
     private Integer order_id;

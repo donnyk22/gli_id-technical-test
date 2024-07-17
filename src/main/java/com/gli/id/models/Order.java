@@ -13,6 +13,7 @@ import java.util.List;
 @Accessors(chain = true)
 @Entity
 @Table(name = "orders")
+@EntityListeners(BaseHook.class)
 @SQLRestriction("deleted = false")
 public class Order extends BaseModel{
     private Integer user_id;

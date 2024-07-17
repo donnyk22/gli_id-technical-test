@@ -3,7 +3,6 @@ package com.gli.id.controllers;
 import com.gli.id.dtos.OrderDto;
 import com.gli.id.dtos.forms.OrderAddForm;
 import com.gli.id.dtos.forms.OrderEditForm;
-import com.gli.id.dtos.queryfilters.OrderQueryFilter;
 import com.gli.id.dtos.responses.Response;
 import com.gli.id.services.order.OrderService;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -26,9 +25,9 @@ public class OrderController {
             @ApiResponse(responseCode = "200", description = "Success"),
             @ApiResponse(responseCode = "500", description = "Internal Server Error")
     })
-    public ResponseEntity find(OrderQueryFilter orderQueryFilter){
+    public ResponseEntity find(@RequestParam(required = false) Integer id){
         try {
-            List<OrderDto> result = orderService.find(orderQueryFilter);
+            List<OrderDto> result = orderService.find(id);
             return Response.ok(result).build();
         }catch (Exception e){
             return Response.error(e.getMessage()).build();

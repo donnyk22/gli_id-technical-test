@@ -7,7 +7,8 @@ import lombok.experimental.Accessors;
 @Getter
 @Setter
 @Accessors(chain = true)
-public class UserDto extends BaseDto{
+public class UserDto {
+    private Integer id;
     private String name;
     private String address;
     private String email;

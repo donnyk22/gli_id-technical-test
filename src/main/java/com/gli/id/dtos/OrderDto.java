@@ -9,7 +9,8 @@ import java.util.List;
 @Getter
 @Setter
 @Accessors(chain = true)
-public class OrderDto extends BaseDto{
+public class OrderDto {
+    private Integer id;
     private Integer user_id;
     private Integer total_price;
     private List<OrderDetailDto> order_list;
