@@ -1,22 +1,22 @@
-# gli_id-technical-test
-Technical test for gli.id (Alfagift)
+https://github.com/kaketsukeru/gli_id-technical-test
+<br>
 - Start service MySQL
-- Buat database baru "order_db", dan import "order_db.sql"
+- Buat database baru "order_db", dan import "order_db.sql". Skema database bisa di lihat di DB_Schema.png (saya melakukan inisiatif untuk membuat skema sendiri, selengkapnya ada di bawah)
 - Sesuaikan Username & Password DB di application.properties
 - Run "mvn install" untuk install semua dependency
 - Run "spring-boot:run"
 - Buka http://localhost:8080/swagger-ui/index.html 
 <br><br>
 <h3>Implementasi soal</h3>
-- Semua/beberapa fitur yang ada di soal sudah diterapkan.
-- Main objektif:
+- Semua/beberapa fitur yang ada di soal sudah diterapkan.<br>
+  <b>Main objektif:</b>
 - Menggunakan Java Spring boot
 - Terdapat unit testing
 - Yang menggunakan singleton pattern ada pada class **com.gli.id.configurations.SwaggerConfig** karena menggunakan @Bean. Namun sebenarnya Spring Boot menggunakan singleton secara default apabila kita menggunakan anotasi dari springframework stereotype, context, dll
 - Menerapkan Timeout pada end-point /dog-public-api. Jika breed == null, maka timeout 5000. Jika breed != null, maka timeout 2000
 - Menerapkan lambda class pada DogPublicApiController pada method findLambda()
-- Melakukan manipulasi JSON pada dog breed shiba, sheepdog, dan terrier.
-- Secondary objektif:
+- Melakukan manipulasi JSON pada dog breed shiba, sheepdog, dan terrier.<br>
+<b>Secondary objektif:</b>
 - Membuat CRUD pada order-api menggunakan MySQL database. Saya melakukan inisiatif dengan membuat skema database sendiri dikarenakan skema pada Dog API dan data yang disajikan kurang begitu lengkap/terlalu sedikit. Sehingga saya bingung untuk menerapkannya pada skema database baru untuk proses CRUD
 <br><br>
 <h3>Dog-API</h3>
