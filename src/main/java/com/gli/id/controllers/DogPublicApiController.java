@@ -20,7 +20,7 @@ public class DogPublicApiController {
     DogPublicApiService dogPublicApiService;
 
     @GetMapping
-    public String find(@RequestParam(value = "breed", required = false) String breed) throws IOException {
+    public String find(@RequestParam(required = false) String breed) throws IOException {
         return dogPublicApiService.getData(breed);
     }
 

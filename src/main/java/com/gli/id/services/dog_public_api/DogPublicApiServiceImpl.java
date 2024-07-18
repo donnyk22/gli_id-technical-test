@@ -29,18 +29,20 @@ public class DogPublicApiServiceImpl implements DogPublicApiService{
 
             //start challenge
             JsonArray messageArray = jsonObject.getAsJsonArray("message");
-            jsonObject.remove("message");
 
             //sheepdog challenge
             if (breed.equalsIgnoreCase("sheepdog")){
+                jsonObject.remove("message");
                 findSheepdog(jsonObject, messageArray);
 
             //terrier challenge
             }else if(breed.equalsIgnoreCase("terrier")){
+                jsonObject.remove("message");
                 findTerrier(jsonObject, messageArray);
 
             //shiba challenge
             }else if(breed.equalsIgnoreCase("shiba")){
+                jsonObject.remove("message");
                 findShiba(jsonObject);
             }
 
