@@ -87,7 +87,6 @@ class OrderControllerTest extends BaseTest {
                 .setUser_id(2)
                 .setId(orderId);
         String json = gson.toJson(editForm);
-        System.out.println(json);
         String url = new URIBuilder()
                 .setPath("/order-api")
                 .toString();
